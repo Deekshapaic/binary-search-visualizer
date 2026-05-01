@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Binary Search Guide</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #07111f;
+        color: #eef6ff;
+        line-height: 1.6;
+      }
+
+      main {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 48px 20px;
+      }
+
+      a {
+        color: #86d7ff;
+      }
+
+      section {
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 8px;
+        padding: 22px;
+        margin-top: 18px;
+      }
+
+      code {
+        background: rgba(255, 255, 255, 0.12);
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a href="./">Back to visualizer</a>
+      <h1>Binary Search Guide</h1>
+      <section>
+        <h2>How it works</h2>
+        <p>Binary search works on a sorted array. It checks the middle value, then removes half of the remaining search space after every comparison.</p>
+      </section>
+      <section>
+        <h2>Steps</h2>
+        <ol>
+          <li>Start with low at the first index and high at the last index.</li>
+          <li>Find the middle index.</li>
+          <li>If the middle value is the target, the search is complete.</li>
+          <li>If the target is larger, continue on the right half.</li>
+          <li>If the target is smaller, continue on the left half.</li>
+        </ol>
+      </section>
+      <section>
+        <h2>Time complexity</h2>
+        <p>The time complexity is <code>O(log n)</code> because the search space is divided by two each step.</p>
+      </section>
+    </main>
+  </body>
+</html>

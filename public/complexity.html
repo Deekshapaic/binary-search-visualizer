@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Complexity Notes</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #07111f;
+        color: #eef6ff;
+        line-height: 1.6;
+      }
+
+      main {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 48px 20px;
+      }
+
+      a {
+        color: #86d7ff;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        margin-top: 18px;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 8px;
+        padding: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a href="./">Back to visualizer</a>
+      <h1>Complexity Notes</h1>
+      <div class="grid">
+        <div class="card">
+          <h2>O(1)</h2>
+          <p>Constant time. The work does not grow with input size.</p>
+        </div>
+        <div class="card">
+          <h2>O(log n)</h2>
+          <p>Logarithmic time. Binary search belongs here because each step halves the data.</p>
+        </div>
+        <div class="card">
+          <h2>O(n)</h2>
+          <p>Linear time. Linear search may check every element once.</p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

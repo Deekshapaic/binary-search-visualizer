@@ -234,6 +234,20 @@ function App() {
         searchItem > inputData[currentStepDetail.mid] ? 'the right' : 'the left'
       } side.`
     : '';
+  const currentMidValue = currentStepDetail ? inputData[currentStepDetail.mid] : null;
+  const remainingSpace = currentStepDetail ? currentStepDetail.upperBound - currentStepDetail.lowerBound + 1 : 0;
+  const searchDecision = currentStepDetail
+    ? Number(searchItem) === currentMidValue
+      ? 'Target matched the midpoint.'
+      : Number(searchItem) > currentMidValue
+        ? 'Target is larger, so the left half is removed.'
+        : 'Target is smaller, so the right half is removed.'
+    : 'Run a search to see the active low, mid, and high pointers.';
+  const learnPages = [
+    { title: 'Binary Search Guide', href: `${process.env.PUBLIC_URL}/binary-search.html` },
+    { title: 'Linear vs Binary', href: `${process.env.PUBLIC_URL}/linear-vs-binary.html` },
+    { title: 'Complexity Notes', href: `${process.env.PUBLIC_URL}/complexity.html` },
+  ];
 
   const generatePdf = () => {
     const doc = new jsPDF({ unit: 'pt', format: 'letter' });
@@ -254,7 +268,11 @@ function App() {
     values.forEach((value, index) => {
       doc.text(value, 60, 290 + index * 14);
     });
-    doc.save('binary-search-report.pdf');
+    const reportUrl = doc.output('bloburl');
+    const reportWindow = window.open(reportUrl, '_blank', 'noopener,noreferrer');
+    if (!reportWindow) {
+      doc.save('binary-search-report.pdf');
+    }
   };
 
   return (
@@ -356,6 +374,40 @@ function App() {
                     {isLearningMode && stepExplanation && (
                       <div className="mt-2 text-info">{stepExplanation}</div>
                     )}
+                  </div>
+
+                  <div className="feature-panel">
+                    <div className="feature-panel-main">
+                      <div className="feature-label">Current step</div>
+                      <h4>{currentStepDetail ? `Iteration ${currentStepDetail.iteration}` : 'Ready to visualize'}</h4>
+                      <p>{searchDecision}</p>
+                      <div className="pointer-grid">
+                        <div>
+                          <span>Low</span>
+                          <strong>{currentStepDetail ? currentStepDetail.lowerBound : '-'}</strong>
+                        </div>
+                        <div>
+                          <span>Mid</span>
+                          <strong>{currentStepDetail ? `${currentStepDetail.mid} (${currentMidValue})` : '-'}</strong>
+                        </div>
+                        <div>
+                          <span>High</span>
+                          <strong>{currentStepDetail ? currentStepDetail.upperBound : '-'}</strong>
+                        </div>
+                        <div>
+                          <span>Remaining</span>
+                          <strong>{remainingSpace || '-'}</strong>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="feature-panel-links">
+                      <div className="feature-label">Open in new page</div>
+                      {learnPages.map((page) => (
+                        <a key={page.href} href={page.href} target="_blank" rel="noreferrer">
+                          {page.title}
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 </Card.Body>
               </Card>

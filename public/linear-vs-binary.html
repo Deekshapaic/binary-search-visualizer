@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Linear vs Binary Search</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #07111f;
+        color: #eef6ff;
+        line-height: 1.6;
+      }
+
+      main {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 48px 20px;
+      }
+
+      a {
+        color: #86d7ff;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 18px;
+        background: rgba(255, 255, 255, 0.07);
+      }
+
+      th,
+      td {
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        padding: 12px;
+        text-align: left;
+      }
+
+      th {
+        background: rgba(255, 255, 255, 0.12);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a href="./">Back to visualizer</a>
+      <h1>Linear Search vs Binary Search</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Linear Search</th>
+            <th>Binary Search</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Input requirement</td>
+            <td>Works on any array</td>
+            <td>Needs a sorted array</td>
+          </tr>
+          <tr>
+            <td>Search pattern</td>
+            <td>Checks one item at a time</td>
+            <td>Splits the search space in half</td>
+          </tr>
+          <tr>
+            <td>Worst case</td>
+            <td>O(n)</td>
+            <td>O(log n)</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>
