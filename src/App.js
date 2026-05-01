@@ -248,6 +248,22 @@ function App() {
     { title: 'Linear vs Binary', href: `${process.env.PUBLIC_URL}/linear-vs-binary.html` },
     { title: 'Complexity Notes', href: `${process.env.PUBLIC_URL}/complexity.html` },
   ];
+  const searchJourney = resultIter[1]?.map((step) => ({
+    ...step,
+    value: inputData[step.mid],
+    space: step.upperBound - step.lowerBound + 1,
+  })) || [];
+  const eliminatedCount = currentStepDetail ? inputData.length - remainingSpace : 0;
+  const sortedStatus = inputData.length ? (isSorted ? 'Sorted' : 'Unsorted') : 'Waiting';
+  const targetIndex = resultIter[0] > -1 ? resultIter[0] : resultRec[0];
+  const bestMethod = actualIter && actualLinear
+    ? actualIter <= actualLinear ? 'Binary search' : 'Linear search'
+    : 'Run a search';
+  const maxValue = inputData.length ? Math.max(...inputData) : '-';
+  const minValue = inputData.length ? Math.min(...inputData) : '-';
+  const efficiencyPercent = actualLinear
+    ? Math.max(0, Math.round(((actualLinear - actualIter) / actualLinear) * 100))
+    : 0;
 
   const generatePdf = () => {
     const doc = new jsPDF({ unit: 'pt', format: 'letter' });
@@ -411,6 +427,69 @@ function App() {
                   </div>
                 </Card.Body>
               </Card>
+
+              <Row>
+                <Col lg={7}>
+                  <Card className="mb-3">
+                    <Card.Header>Search Journey</Card.Header>
+                    <Card.Body>
+                      {searchJourney.length ? (
+                        <div className="journey-list">
+                          {searchJourney.map((step, index) => (
+                            <div
+                              key={step.iteration}
+                              className={`journey-step ${index === currentStep ? 'active' : ''}`}
+                            >
+                              <div className="journey-marker">{step.iteration}</div>
+                              <div>
+                                <strong>Checked index {step.mid}</strong>
+                                <p>
+                                  Value {step.value}, search space {step.space}, bounds {step.lowerBound} to {step.upperBound}.
+                                </p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="text-muted">Run a search to build a step-by-step journey.</p>
+                      )}
+                    </Card.Body>
+                  </Card>
+                </Col>
+                <Col lg={5}>
+                  <Card className="mb-3">
+                    <Card.Header>Array Insights</Card.Header>
+                    <Card.Body>
+                      <div className="insight-grid">
+                        <div>
+                          <span>Status</span>
+                          <strong>{sortedStatus}</strong>
+                        </div>
+                        <div>
+                          <span>Target index</span>
+                          <strong>{targetIndex > -1 ? targetIndex : 'Not found'}</strong>
+                        </div>
+                        <div>
+                          <span>Min / Max</span>
+                          <strong>{minValue} / {maxValue}</strong>
+                        </div>
+                        <div>
+                          <span>Eliminated</span>
+                          <strong>{eliminatedCount}</strong>
+                        </div>
+                        <div>
+                          <span>Best method</span>
+                          <strong>{bestMethod}</strong>
+                        </div>
+                        <div>
+                          <span>Step saving</span>
+                          <strong>{efficiencyPercent}%</strong>
+                        </div>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </Row>
             </Col>
 
             <Col xl={4}>
