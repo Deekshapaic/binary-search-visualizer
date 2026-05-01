@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/binary-search-visualizer/static/css/main.2705d275.chunk.css",
+    "main.js": "/binary-search-visualizer/static/js/main.4f901f63.chunk.js",
+    "main.js.map": "/binary-search-visualizer/static/js/main.4f901f63.chunk.js.map",
+    "runtime-main.js": "/binary-search-visualizer/static/js/runtime-main.6e90c912.js",
+    "runtime-main.js.map": "/binary-search-visualizer/static/js/runtime-main.6e90c912.js.map",
+    "static/css/2.a6362f4d.chunk.css": "/binary-search-visualizer/static/css/2.a6362f4d.chunk.css",
+    "static/js/2.80a2616d.chunk.js": "/binary-search-visualizer/static/js/2.80a2616d.chunk.js",
+    "static/js/2.80a2616d.chunk.js.map": "/binary-search-visualizer/static/js/2.80a2616d.chunk.js.map",
+    "static/js/3.f25728d8.chunk.js": "/binary-search-visualizer/static/js/3.f25728d8.chunk.js",
+    "static/js/3.f25728d8.chunk.js.map": "/binary-search-visualizer/static/js/3.f25728d8.chunk.js.map",
+    "static/js/4.8fcb6b85.chunk.js": "/binary-search-visualizer/static/js/4.8fcb6b85.chunk.js",
+    "static/js/4.8fcb6b85.chunk.js.map": "/binary-search-visualizer/static/js/4.8fcb6b85.chunk.js.map",
+    "static/js/5.ba820ae4.chunk.js": "/binary-search-visualizer/static/js/5.ba820ae4.chunk.js",
+    "static/js/5.ba820ae4.chunk.js.map": "/binary-search-visualizer/static/js/5.ba820ae4.chunk.js.map",
+    "index.html": "/binary-search-visualizer/index.html",
+    "static/css/2.a6362f4d.chunk.css.map": "/binary-search-visualizer/static/css/2.a6362f4d.chunk.css.map",
+    "static/css/main.2705d275.chunk.css.map": "/binary-search-visualizer/static/css/main.2705d275.chunk.css.map",
+    "static/js/2.80a2616d.chunk.js.LICENSE.txt": "/binary-search-visualizer/static/js/2.80a2616d.chunk.js.LICENSE.txt",
+    "static/js/3.f25728d8.chunk.js.LICENSE.txt": "/binary-search-visualizer/static/js/3.f25728d8.chunk.js.LICENSE.txt",
+    "static/js/4.8fcb6b85.chunk.js.LICENSE.txt": "/binary-search-visualizer/static/js/4.8fcb6b85.chunk.js.LICENSE.txt",
+    "static/js/5.ba820ae4.chunk.js.LICENSE.txt": "/binary-search-visualizer/static/js/5.ba820ae4.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6e90c912.js",
+    "static/css/2.a6362f4d.chunk.css",
+    "static/js/2.80a2616d.chunk.js",
+    "static/css/main.2705d275.chunk.css",
+    "static/js/main.4f901f63.chunk.js"
+  ]
+}
