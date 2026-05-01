@@ -264,6 +264,29 @@ function App() {
   const efficiencyPercent = actualLinear
     ? Math.max(0, Math.round(((actualLinear - actualIter) / actualLinear) * 100))
     : 0;
+  const resultLabel = !inputData.length
+    ? 'Ready'
+    : targetIndex > -1
+      ? `Found at index ${targetIndex}`
+      : 'Target not found';
+  const searchWindowPercent = inputData.length ? Math.round((remainingSpace / inputData.length) * 100) : 0;
+  const linearWidth = actualLinear ? 100 : 0;
+  const binaryWidth = actualLinear && actualIter ? Math.max(8, Math.round((actualIter / actualLinear) * 100)) : 0;
+  const getDisplayItems = (step = currentStepDetail) => {
+    const displayLimit = 72;
+    if (inputData.length <= displayLimit) {
+      return inputData.map((value, index) => ({ value, index }));
+    }
+
+    const focusIndex = step?.mid || 0;
+    const halfWindow = Math.floor(displayLimit / 2);
+    const start = Math.max(0, Math.min(inputData.length - displayLimit, focusIndex - halfWindow));
+    return inputData.slice(start, start + displayLimit).map((value, offset) => ({
+      value,
+      index: start + offset,
+    }));
+  };
+  const overviewItems = getDisplayItems();
 
   const generatePdf = () => {
     const doc = new jsPDF({ unit: 'pt', format: 'letter' });
@@ -298,6 +321,34 @@ function App() {
           <Header />
         </Col>
         <Col>
+          <section className="hero-panel mb-3">
+            <div>
+              <div className="feature-label">Algorithm command center</div>
+              <h1>Binary Search Visualizer</h1>
+              <p>
+                Watch the search space collapse in real time, compare algorithms, and open quick reference pages when you want the theory.
+              </p>
+            </div>
+            <div className="hero-stats">
+              <div>
+                <span>Status</span>
+                <strong>{resultLabel}</strong>
+              </div>
+              <div>
+                <span>Array size</span>
+                <strong>{inputData.length || '-'}</strong>
+              </div>
+              <div>
+                <span>Saved steps</span>
+                <strong>{efficiencyPercent}%</strong>
+              </div>
+              <div>
+                <span>Search window</span>
+                <strong>{searchWindowPercent || 0}%</strong>
+              </div>
+            </div>
+          </section>
+
           <form onSubmit={handleSubmit} className="mb-3 p-1">
             <InputGroup className="mb-3">
               <FormControl
@@ -359,19 +410,24 @@ function App() {
                     <Table className="border-primary" variant="secondary" size="sm" bordered>
                       <tbody>
                         <tr>
-                          {inputData.map((d, index) => (
+                          {overviewItems.map(({ value, index }) => (
                             <td
                               key={index}
                               data-index={index}
                               className={`text-center fw-bold array-item ${getCellItemClass(resultIter[1]?.[currentStep], index)}`}
                             >
-                              {d}
+                              {value}
                             </td>
                           ))}
                         </tr>
                       </tbody>
                     </Table>
                   </div>
+                  {inputData.length > overviewItems.length && (
+                    <div className="array-window-note">
+                      Showing {overviewItems.length} focused values around the active midpoint from {inputData.length} total values.
+                    </div>
+                  )}
 
                   <div className="mb-3">
                     <Button variant="secondary" onClick={() => { setIsLearningMode(!isLearningMode); setAutoPlay(false); }} className="me-2">
@@ -537,6 +593,20 @@ function App() {
                   <div className="mb-2"><strong>Linear search steps:</strong> {actualLinear}</div>
                   <div className="mb-2 text-muted">Binary search eliminates half the remaining array each step, while linear search checks elements sequentially.</div>
                   <div className="mb-2"><strong>Performance gap:</strong> {actualLinear - actualIter} extra steps compared to iterative binary search.</div>
+                  <div className="race-bars mt-3">
+                    <div>
+                      <span>Binary</span>
+                      <div className="race-track">
+                        <div className="race-fill binary" style={{ width: `${binaryWidth}%` }} />
+                      </div>
+                    </div>
+                    <div>
+                      <span>Linear</span>
+                      <div className="race-track">
+                        <div className="race-fill linear" style={{ width: `${linearWidth}%` }} />
+                      </div>
+                    </div>
+                  </div>
                 </Card.Body>
               </Card>
 
@@ -566,13 +636,13 @@ function App() {
                         <Table bordered size="sm">
                           <tbody>
                             <tr>
-                              {inputData.map((d, index) => (
+                              {getDisplayItems(r).map(({ value, index }) => (
                                 <td
                                   key={index}
                                   data-index={index}
                                   className={`text-center fw-bold array-item ${getCellItemClass(r, index)}`}
                                 >
-                                  {d}
+                                  {value}
                                 </td>
                               ))}
                             </tr>
@@ -607,13 +677,13 @@ function App() {
                         <Table bordered size="sm">
                           <tbody>
                             <tr>
-                              {inputData.map((d, index) => (
+                              {getDisplayItems(r).map(({ value, index }) => (
                                 <td
                                   key={index}
                                   data-index={index}
                                   className={`text-center fw-bold array-item ${getCellItemClass(r, index)}`}
                                 >
-                                  {d}
+                                  {value}
                                 </td>
                               ))}
                             </tr>
